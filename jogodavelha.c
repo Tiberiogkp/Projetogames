@@ -3,15 +3,15 @@
 #include <ctype.h>
 #include <time.h>
 
-char board[3][3];
-const char PLAYER = 'X';
-const char COMPUTER = 'O';
-
+char board[3][3]; //declara uma array de nome board com 3 linhas e 3 colunas
+const char PLAYER = 'X'; // declara uma variavel de nome Player do tipo char e estabelece o valor dela como X
+const char COMPUTER = 'O'; // declara uma variavel de nome Computer do tipo char e estabelece o valor dela como O
+/*serão criadas 7 funções prototipicas*/
 void resetBoard();
-void printBoard();
-int checkFreeSpaces();
-void playerMove();
-void computerMove();
+void printBoard(); /* O tabuleiro será uma array de caracteres de 2 Dimensões*/
+int checkFreeSpaces(); /* Se essa função retornar zero o jogo acabou, todas as posições do tabuleiro estão preenchidas*/
+void playerMove(); /* Estabalece quando é a vez do Player*/
+void computerMove(); /* Estabalece quando é a vez do Computador*/
 char checkWinner();
 void printWinner(char);
 
@@ -27,13 +27,13 @@ int main ()
      response = ' ';
      resetBoard();
 
-  while (winner == ' ' && checkFreeSpaces() !=0)
+  while (winner == ' ' && checkFreeSpaces() !=0) // se winner for igual vazio não tem ganhador E depois de evocar a checkfreespaces não pode ser zero
   {
       printBoard();
 
       playerMove();
       winner = checkWinner();
-      if(winner != ' ' || checkFreeSpaces() == 0)
+      if(winner != ' ' || checkFreeSpaces() == 0)//se o winner não for vazio, ou seja, se tivermos um vencedor OU o checkFreeSpaces for 0 o loop é parado (break)
       {
           break;
       }
@@ -58,13 +58,13 @@ int main ()
 
   return 0;
 }
-void resetBoard();
+void resetBoard()
 {
-  for(int i = 0; i < 3; i++)
+  for(int i = 0; i < 3; i++) // loop mais externo é para as linhas 
   {
-    for(int j = 0; j < 3; j++)
+    for(int j = 0; j < 3; j++) // loop mais interno é para as colunas
       {
-          board[i][j] = ' ';
+          board[i][j] = ' '; //atribui o caractere de espaço em branco ' ' a cada elemento da matriz board na posição [i][j], limpando todos os elementos da matriz, preparando-a para um novo uso.
       }
   }
 }
@@ -79,7 +79,7 @@ void printBoard();
 }
 int checkFreeSpaces();
 {
-  int freeSpaces = 9;
+  int freeSpaces = 9; //declara variavel local de nome freespaces e inicializa ela com o valor de 9
   
     for(int i = 0; i < 3; i++)
     {
@@ -98,14 +98,14 @@ void playerMove();
   int x;
   int y;
 
-do
+do//esse loop do-while solicita as entradas do jogador até que ele escolha uma posição válida
 {
     printf("Enter row number (1-3): ")
   scanf("%d", &x);
-  x--;
+  x--;//precisa desse decremento de 1 unidade pois o endereço das celula da matriz só pode ser 0,1 ou 2
   printf("Enter column number (1-3): ")
   scanf("%d", &y);
-  y--;
+  y--;//precisa desse decremento de 1 unidade pois o endereço das celula da matriz só pode ser 0,1 ou 2
 
   if(board[x][y] != ' ') /* utilizado para confirmar se a célula (coordenada) estará ocupada (não vazia)*/
   {
@@ -138,7 +138,7 @@ void computerMove();
     }
     else
     {
-      printWinner(' ');
+      printWinner(' '); //printWinner vazio significa um empate
     }
 }
 char checkWinner();
@@ -171,7 +171,7 @@ char checkWinner();
 
   return ' ';
 }
-void printWinner(char Winner);
+void printWinner(char Winner); //função recebe uma variável de nome Winner do tipo char
 {
     if (winner == PLAYER)
     {
